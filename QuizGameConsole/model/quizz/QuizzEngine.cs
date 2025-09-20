@@ -2,12 +2,15 @@
 
 public class QuizzEngine
 {
-    public bool CheckAnswer(char userChoice, Answer answer)
+    public bool CheckAnswer(char userChoice, Question question)
     {
-        int index = userChoice - 'a';
-        if (index < 0)
+        if (question is null) throw new ArgumentNullException(nameof(question));
+
+        char c = char.ToLowerInvariant(userChoice);
+        int index = c - 'a';
+        if (index < 0 || index >= question.Choices.Count)
             return false;
 
-        return answer.IsCorrect;
+        return question.Choices[index].IsCorrect;
     }
 }

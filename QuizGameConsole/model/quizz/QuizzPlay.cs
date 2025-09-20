@@ -2,12 +2,18 @@
 
 public class QuizzPlay
 {
-    private readonly Quizz _quizz;
-    private readonly int _correctAnswer;
+    public Quizz Quizz { get; private set; }
+    public int CorrectAnswers { get; private set; }
 
     public QuizzPlay(Quizz quizz, int correctAnswer)
     {
-        _quizz = quizz;
-        _correctAnswer = correctAnswer;
+        Quizz = quizz;
+        CorrectAnswers = correctAnswer;
+    }
+    
+    public override string ToString()
+    {
+        double score = ((double)CorrectAnswers / Quizz.Questions.Count) * 100;
+        return $"Quizz - {score:F2}%";
     }
 }

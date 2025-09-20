@@ -8,7 +8,7 @@ public class Answer
     public Answer(string text, bool isCorrect)
     {
         Text = text;
-        isCorrect = isCorrect;
+        IsCorrect = isCorrect;
     }
 
     public override string ToString()

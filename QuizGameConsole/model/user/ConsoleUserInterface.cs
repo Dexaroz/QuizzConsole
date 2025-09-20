@@ -27,6 +27,26 @@ public class ConsoleUserInterface : IUserInterface
         }
     }
 
+    public int GetMenuUserInput(string prompt, int max, int min)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            var input = Console.ReadLine();
+            if (int.TryParse(input, out int choice) && IsValidRange(choice, min, max))
+            {
+                return choice;
+            }
+            
+            DisplayError($"Please enter a number between {min} and {max}.");
+        }
+    }
+
+    private bool IsValidRange(int choice, int min, int max)
+    {
+        return (choice >= min) && (choice <= max);
+    }
+    
     private bool IsValid(char key, char[] acceptedValues)
     {
         return acceptedValues.Contains(key);

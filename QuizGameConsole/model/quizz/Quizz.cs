@@ -2,10 +2,13 @@
 
 public class Quizz
 {
-    private readonly List<Question> _questions;
+    public string Title { get; private set; }
+    public IReadOnlyList<Question> Questions { get; }
 
-    public Quizz(List<Question> questions)
+    public Quizz(string title, IEnumerable<Question> questions)
     {
-        _questions = questions;
+        Title = string.IsNullOrWhiteSpace(title) ? throw new ArgumentException("Title cannot be null or empty.") : title;
+        Questions = questions?.ToList() ?? throw new ArgumentNullException(nameof(questions));
+        if (Questions.Count == 0) throw new ArgumentException("Quiz must have questions.");
     }
 }
